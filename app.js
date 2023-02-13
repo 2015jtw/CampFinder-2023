@@ -36,7 +36,7 @@ const user = require('./models/user');
 const dbUrl = process.env.DB_URL
 
 
-mongoose.connect("mongodb://0.0.0.0:27017/camp-finder");
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
