@@ -1,0 +1,84 @@
+<head>
+    <!-- link custom css file for campgrounds page -->
+    <link rel="stylesheet" href="/css/app.css">
+
+</head>
+
+<% layout('layout/boilerplate')%>
+
+<div id="map" style="height: 97%; height: 500px; margin-left: 2rem;"></div>
+
+
+<h1 class="text-center my-3">All Campgrounds</h1>
+
+<!-- search bar -->
+<div class="row">
+    <div class="col-12 offset-md-1 mb-3">
+        <form id="searchBar" action="/campgrounds" method="GET" class="form-inline">
+            <div class="input-group">
+                <div class="col-10">
+                    <input type="search" name="search" class="form-control" placeholder="Campground search..." required>
+
+                </div>
+                <div class="col-2">
+                    <input type="submit" value="search" class="btn btn-primary">
+
+                </div>
+            </div>
+    
+        </form>
+    </div>
+
+</div>
+
+<div class="row" >
+    <div class="col-md-12 my-2 ">
+        <div class="col-md-9 offset-3">
+            <% if(noMatch.length !== undefined) { %>
+            <h3 style="color: #D32638;"><%= noMatch %></h3>
+            <% } %>
+        </div>
+        
+
+    <ul>
+    <% for(let campground of campgrounds) { %> 
+        <div class="card my-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <%if(campground.images.length) {%>
+                        <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
+                        <% }else {%>
+                        <img class="img-fluid" alt=""
+                            src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png">
+                        <% } %>
+            
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"> <%= campground.title %>  </h5>
+                        <p class="card-text">
+                            <small class="text-muted"><%= campground.location %></small>
+                        </p>
+                        <p class="card-text">$<%= campground.price %> per night</p>
+                        <p class="card-text"><%= campground.description %></p>
+                        <a href="/campgrounds/<%= campground._id %> " class="btn btn-primary">View <%= campground.title %> </a>
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    <% } %> 
+    </ul class="mb-3">
+
+
+
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+</script>
+
+    
+
+<script src="/clusterMap.js"></script>

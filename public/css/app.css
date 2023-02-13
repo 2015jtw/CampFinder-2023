@@ -1,0 +1,25 @@
+.mapboxgl-popup-content{
+    border-radius: 5%;
+    color: black;
+}
+
+.mapboxgl-popup-content h3{
+    font-size: 1.5rem;
+    margin-top: 3%;
+    
+}
+
+.mapboxgl-popup-content p{
+    text-align: center;
+}
+
+
+.mapboxgl-popup-content div{
+    text-align: center;
+}
+
+
+.mapboxgl-popup-content a{
+    color: white;
+    text-decoration: none;
+}
